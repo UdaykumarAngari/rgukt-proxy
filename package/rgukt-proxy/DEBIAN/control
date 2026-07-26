@@ -1,0 +1,11 @@
+Package: rgukt-proxy
+Version: 1.0.0
+Section: net
+Priority: optional
+Architecture: all
+Maintainer: Uday Kumar Angari <angariuday@gmail.com>
+Depends: redsocks, iptables-persistent, netfilter-persistent
+Homepage: https://rgukt-proxy.udaykumar-angari.in
+Description: Transparent Proxy Installer for RGUKT
+ Installs and configures redsocks and iptables
+ for seamless RGUKT campus internet access.
