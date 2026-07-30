@@ -2,18 +2,21 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="A one-command transparent proxy installer configuring redsocks and iptables on Ubuntu for RGUKT campus internet access.">
+    <title>RGUKT Proxy Setup</title>
+
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-41E8G06QB8"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
+
         gtag('config', 'G-41E8G06QB8');
     </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="A one-command transparent proxy installer configuring redsocks and iptables on Ubuntu for RGUKT campus internet access.">
-    <title>RGUKT Transparent Proxy Installer</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -140,17 +143,23 @@
         <section id="why-built" class="why-built-section scroll-animate">
             <div class="section-header">
                 <h2 class="section-title">Why I Built RGUKT Proxy Installer</h2>
-                <p class="section-subtitle">The story behind the project and why command line proxy configuration should not get in your way.</p>
+                <p class="section-subtitle">The story behind the project and why command line proxy configuration should
+                    not get in your way.</p>
             </div>
             <div class="why-built-container">
                 <div class="why-built-content">
                     <p class="story-intro">
-                        I was tired of terminal commands failing every single time I connected to the campus network. As a student at RGUKT Basar, the browser works fine after entering the proxy, but the moment you run git clone or npm install, everything breaks. It was incredibly frustrating.
+                        I was tired of terminal commands failing every single time I connected to the campus network. As
+                        a student at RGUKT Basar, the browser works fine after entering the proxy, but the moment you
+                        run git clone or npm install, everything breaks. It was incredibly frustrating.
                     </p>
-                    
+
                     <div class="story-problem">
                         <span class="story-label">The Problem</span>
-                        <p>Campus WiFi blocks standard terminal connections by default. We were all spending hours manually tweaking configurations for git, npm, docker, and ssh, only for them to fail again the next day. Classmates were literally switching back to Windows out of pure frustration.</p>
+                        <p>Campus WiFi blocks standard terminal connections by default. We were all spending hours
+                            manually tweaking configurations for git, npm, docker, and ssh, only for them to fail again
+                            the next day. Classmates were literally switching back to Windows out of pure frustration.
+                        </p>
                         <div class="command-badge-grid">
                             <span>git clone</span>
                             <span>npm install</span>
@@ -160,11 +169,13 @@
                             <span>ssh</span>
                         </div>
                     </div>
-                    
+
                     <div class="story-solution">
                         <span class="story-label">The Solution</span>
                         <p>
-                            I built RGUKT Proxy Installer to solve this once and for all. By configuring Redsocks and iptables, it transparently redirects all terminal TCP traffic through the campus proxy. Install it once, and your terminal just works.
+                            I built RGUKT Proxy Installer to solve this once and for all. By configuring Redsocks and
+                            iptables, it transparently redirects all terminal TCP traffic through the campus proxy.
+                            Install it once, and your terminal just works.
                         </p>
                     </div>
 
@@ -181,14 +192,20 @@
                             <span class="terminal-title">bash: proxy error</span>
                         </div>
                         <div class="terminal-body">
-                            <div class="term-line"><span class="term-prompt">$</span> <span class="term-cmd">git clone https://github.com/UdaykumarAngari/rgukt-proxy.git</span></div>
-                            <div class="term-err">fatal: unable to access 'https://github.com/...': Failed to connect to github.com port 443: Connection timed out</div>
-                            <div class="term-line"><span class="term-prompt">$</span> <span class="term-cmd">npm install</span></div>
+                            <div class="term-line"><span class="term-prompt">$</span> <span class="term-cmd">git clone
+                                    https://github.com/UdaykumarAngari/rgukt-proxy.git</span></div>
+                            <div class="term-err">fatal: unable to access 'https://github.com/...': Failed to connect to
+                                github.com port 443: Connection timed out</div>
+                            <div class="term-line"><span class="term-prompt">$</span> <span class="term-cmd">npm
+                                    install</span></div>
                             <div class="term-err">npm ERR! code EAI_AGAIN</div>
                             <div class="term-err">npm ERR! errno EAI_AGAIN</div>
-                            <div class="term-err">npm ERR! request to https://registry.npmjs.org/ failed, reason: getaddrinfo EAI_AGAIN registry.npmjs.org</div>
-                            <div class="term-line"><span class="term-prompt">$</span> <span class="term-cmd">docker pull ubuntu</span></div>
-                            <div class="term-err">Error response from daemon: Get "https://registry-1.docker.io/v2/": dial tcp: lookup registry-1.docker.io: Temporary failure in name resolution</div>
+                            <div class="term-err">npm ERR! request to https://registry.npmjs.org/ failed, reason:
+                                getaddrinfo EAI_AGAIN registry.npmjs.org</div>
+                            <div class="term-line"><span class="term-prompt">$</span> <span class="term-cmd">docker pull
+                                    ubuntu</span></div>
+                            <div class="term-err">Error response from daemon: Get "https://registry-1.docker.io/v2/":
+                                dial tcp: lookup registry-1.docker.io: Temporary failure in name resolution</div>
                         </div>
                     </div>
                 </div>
@@ -207,7 +224,8 @@
                     <div class="step-info-block">
                         <div class="step-badge">Step 1</div>
                         <h3 class="step-card-title">Install RGUKT Proxy Installer</h3>
-                        <p class="step-card-desc">Connect to mobile hotspot, Download and install the latest version using a single command.</p>
+                        <p class="step-card-desc">Connect to mobile hotspot, Download and install the latest version
+                            using a single command.</p>
                         <div class="step-code-wrapper">
                             <div class="step-code-block">
                                 <code
@@ -373,7 +391,8 @@
                     <div class="step-info-block">
                         <div class="step-badge">Step 5</div>
                         <h3 class="step-card-title">Configure the Campus Proxy</h3>
-                        <p class="step-card-desc">Reconnect to the RGUKT Campus Wi-Fi/LAN , turn on proxy with respective host ex : studentnet.rgukt.ac.in or hostelinternet.rgukt.ac.in and run:</p>
+                        <p class="step-card-desc">Reconnect to the RGUKT Campus Wi-Fi/LAN , turn on proxy with
+                            respective host ex : studentnet.rgukt.ac.in or hostelinternet.rgukt.ac.in and run:</p>
                         <div class="step-code-wrapper">
                             <div class="step-code-block">
                                 <code id="step-5-code">rgukt-proxy</code>
@@ -422,7 +441,9 @@
                     <div class="step-info-block">
                         <div class="step-badge">Step 6</div>
                         <h3 class="step-card-title">Installation Complete</h3>
-                        <p class="step-card-desc">Once the installation finishes successfully, you can run any command line tools like Git, npm, or Docker on the RGUKT Campus Network without manual proxy configurations.</p>
+                        <p class="step-card-desc">Once the installation finishes successfully, you can run any command
+                            line tools like Git, npm, or Docker on the RGUKT Campus Network without manual proxy
+                            configurations.</p>
                     </div>
                     <div class="step-card-visual">
                         <div class="doc-image-wrapper image-wrapper">
@@ -467,7 +488,8 @@
                     </div>
                     <h3 class="configured-card-title">Redsocks Proxy</h3>
                     <p class="configured-card-desc">Automatically constructs and maintains your
-                        <code>/etc/redsocks.conf</code> with server endpoints and authentication hashes.</p>
+                        <code>/etc/redsocks.conf</code> with server endpoints and authentication hashes.
+                    </p>
                 </div>
                 <div class="configured-card scroll-animate">
                     <div class="configured-icon-wrapper">
@@ -492,7 +514,8 @@
                     </div>
                     <h3 class="configured-card-title">Persistent Firewall</h3>
                     <p class="configured-card-desc">Saves all routing and iptables rule configurations permanently using
-                        <code>netfilter-persistent</code> so your internet works seamlessly after power cycles.</p>
+                        <code>netfilter-persistent</code> so your internet works seamlessly after power cycles.
+                    </p>
                 </div>
                 <div class="configured-card scroll-animate">
                     <div class="configured-icon-wrapper">
