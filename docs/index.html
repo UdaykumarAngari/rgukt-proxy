@@ -1,17 +1,577 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>RGUKT Proxy Installer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="A one-command transparent proxy installer configuring redsocks and iptables on Ubuntu for RGUKT campus internet access.">
+    <title>RGUKT Transparent Proxy Installer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css?v=4">
+
+    <script>
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
 </head>
+
 <body>
 
-<h1>RGUKT Transparent Proxy Installer</h1>
-<p>Do follow me on linkedin: <a href="https://www.linkedin.com/in/udaykumar-angari/">Uday Kumar Angari</a></p>
-<p>Install using:</p>
+    <header class="header">
+        <div class="nav-container">
+            <a href="#" class="logo-link">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                    <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                    <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                    <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                </svg>
+                <span class="logo-text">RGUKT Proxy</span>
+            </a>
+            <nav class="nav-menu">
+                <a href="#why-built" class="nav-item">Why I Built This</a>
+                <a href="#installation" class="nav-item">Installation</a>
+                <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <a href="https://github.com/UdaykumarAngari/rgukt-proxy" target="_blank" rel="noopener noreferrer"
+                    class="nav-item github-nav-link">
+                    <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                    </svg>
+                    <span>GitHub</span>
+                </a>
+            </nav>
+        </div>
+    </header>
 
-<pre>
-curl -fsSL https://rgukt-proxy.udaykumar-angari.in/install.sh | bash
-</pre>
+    <main>
 
+        <section class="hero-section">
+            <div class="hero-container scroll-animate">
+                <div class="hero-badge">
+                    <span class="badge-text">fast, automated configuration</span>
+                </div>
+                <h1 class="hero-title">
+                    RGUKT Transparent Proxy Installer
+                </h1>
+                <p class="hero-subtitle">
+                    Configure the RGUKT campus proxy on Ubuntu in minutes. Redirect all TCP traffic transparently with a
+                    single command.
+                </p>
+
+                <div class="command-box-wrapper">
+                    <div class="command-box">
+                        <span class="command-prompt">$</span>
+                        <code class="command-text"
+                            id="install-command">curl -fsSL https://rgukt-proxy.udaykumar-angari.in/install.sh | bash</code>
+                        <button class="copy-btn" data-clipboard-target="#install-command"
+                            aria-label="Copy installation command">
+                            <span class="copy-tooltip">Copy</span>
+                            <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="hero-actions">
+                    <a href="https://github.com/UdaykumarAngari/rgukt-proxy" target="_blank" rel="noopener noreferrer"
+                        class="btn btn-secondary">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                        </svg>
+                        <span>GitHub Repository</span>
+                    </a>
+                    <a href="downloads/rgukt-proxy.deb" class="btn btn-primary" download>
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        <span>Download .deb</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="why-built" class="why-built-section scroll-animate">
+            <div class="section-header">
+                <h2 class="section-title">Why I Built RGUKT Proxy Installer</h2>
+                <p class="section-subtitle">The story behind the project and why command line proxy configuration should not get in your way.</p>
+            </div>
+            <div class="why-built-container">
+                <div class="why-built-content">
+                    <p class="story-intro">
+                        I was tired of terminal commands failing every single time I connected to the campus network. As a student at RGUKT Basar, the browser works fine after entering the proxy, but the moment you run git clone or npm install, everything breaks. It was incredibly frustrating.
+                    </p>
+                    
+                    <div class="story-problem">
+                        <span class="story-label">The Problem</span>
+                        <p>Campus WiFi blocks standard terminal connections by default. We were all spending hours manually tweaking configurations for git, npm, docker, and ssh, only for them to fail again the next day. Classmates were literally switching back to Windows out of pure frustration.</p>
+                        <div class="command-badge-grid">
+                            <span>git clone</span>
+                            <span>npm install</span>
+                            <span>docker pull</span>
+                            <span>apt update</span>
+                            <span>curl and wget</span>
+                            <span>ssh</span>
+                        </div>
+                    </div>
+                    
+                    <div class="story-solution">
+                        <span class="story-label">The Solution</span>
+                        <p>
+                            I built RGUKT Proxy Installer to solve this once and for all. By configuring Redsocks and iptables, it transparently redirects all terminal TCP traffic through the campus proxy. Install it once, and your terminal just works.
+                        </p>
+                    </div>
+
+                    <div class="why-built-quote">
+                        "Build cool things. Do not waste time fighting proxy settings."
+                    </div>
+                </div>
+                <div class="why-built-terminal">
+                    <div class="terminal-card">
+                        <div class="terminal-header">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-green"></span>
+                            <span class="terminal-title">bash: proxy error</span>
+                        </div>
+                        <div class="terminal-body">
+                            <div class="term-line"><span class="term-prompt">$</span> <span class="term-cmd">git clone https://github.com/UdaykumarAngari/rgukt-proxy.git</span></div>
+                            <div class="term-err">fatal: unable to access 'https://github.com/...': Failed to connect to github.com port 443: Connection timed out</div>
+                            <div class="term-line"><span class="term-prompt">$</span> <span class="term-cmd">npm install</span></div>
+                            <div class="term-err">npm ERR! code EAI_AGAIN</div>
+                            <div class="term-err">npm ERR! errno EAI_AGAIN</div>
+                            <div class="term-err">npm ERR! request to https://registry.npmjs.org/ failed, reason: getaddrinfo EAI_AGAIN registry.npmjs.org</div>
+                            <div class="term-line"><span class="term-prompt">$</span> <span class="term-cmd">docker pull ubuntu</span></div>
+                            <div class="term-err">Error response from daemon: Get "https://registry-1.docker.io/v2/": dial tcp: lookup registry-1.docker.io: Temporary failure in name resolution</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="installation" class="installation-section scroll-animate">
+            <div class="section-header">
+                <h2 class="section-title">Installation Guide</h2>
+                <p class="section-subtitle">Follow these simple steps to configure the RGUKT Transparent Proxy on
+                    Ubuntu.</p>
+            </div>
+
+            <div class="steps-list">
+                <div class="step-card scroll-animate">
+                    <div class="step-info-block">
+                        <div class="step-badge">Step 1</div>
+                        <h3 class="step-card-title">Install RGUKT Proxy Installer</h3>
+                        <p class="step-card-desc">Connect to mobile hotspot, Download and install the latest version using a single command.</p>
+                        <div class="step-code-wrapper">
+                            <div class="step-code-block">
+                                <code
+                                    id="step-1-code">curl -fsSL https://rgukt-proxy.udaykumar-angari.in/install.sh | bash</code>
+                                <button class="copy-btn" data-clipboard-target="#step-1-code"
+                                    aria-label="Copy installation command">
+                                    <span class="copy-tooltip">Copy</span>
+                                    <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                    </svg>
+                                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.5">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-card-visual">
+                        <div class="doc-image-wrapper image-wrapper">
+                            <img src="images/step1.png" alt="Install RGUKT Proxy Installer"
+                                class="gallery-img step-doc-img">
+                            <div class="zoom-overlay">
+                                <svg class="zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card scroll-animate">
+                    <div class="step-info-block">
+                        <div class="step-badge">Step 2</div>
+                        <h3 class="step-card-title">First-Time Setup</h3>
+                        <p class="step-card-desc">If required packages are missing, the installer will detect them
+                            automatically and display setup instructions.</p>
+                    </div>
+                    <div class="step-card-visual">
+                        <div class="doc-image-wrapper image-wrapper">
+                            <img src="images/step2.png" alt="First-Time Setup Instructions"
+                                class="gallery-img step-doc-img">
+                            <div class="zoom-overlay">
+                                <svg class="zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card scroll-animate">
+                    <div class="step-info-block">
+                        <div class="step-badge">Step 3</div>
+                        <h3 class="step-card-title">Install Required Packages</h3>
+                        <p class="step-card-desc">Connect to a mobile hotspot or any internet connection and run:</p>
+                        <div class="step-code-wrapper">
+                            <div class="step-code-block">
+                                <code id="step-3-code-1">sudo apt update</code>
+                                <button class="copy-btn" data-clipboard-target="#step-3-code-1"
+                                    aria-label="Copy update command">
+                                    <span class="copy-tooltip">Copy</span>
+                                    <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                    </svg>
+                                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.5">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="step-code-wrapper">
+                            <div class="step-code-block">
+                                <code
+                                    id="step-3-code-2">sudo apt install iptables-persistent netfilter-persistent</code>
+                                <button class="copy-btn" data-clipboard-target="#step-3-code-2"
+                                    aria-label="Copy install command">
+                                    <span class="copy-tooltip">Copy</span>
+                                    <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                    </svg>
+                                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.5">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-card-visual">
+                        <div class="doc-image-wrapper image-wrapper">
+                            <img src="images/step3.png" alt="Install Required Packages"
+                                class="gallery-img step-doc-img">
+                            <div class="zoom-overlay">
+                                <svg class="zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card scroll-animate">
+                    <div class="step-info-block">
+                        <div class="step-badge">Step 4</div>
+                        <h3 class="step-card-title">Save Firewall Rules</h3>
+                        <p class="step-card-desc">During package installation:</p>
+                        <p class="step-card-desc">For <strong>IPv4</strong>: Select <strong>No</strong>.</p>
+                        <p class="step-card-desc">For <strong>IPv6</strong>: Select <strong>No</strong>.</p>
+                    </div>
+                    <div class="step-card-visual">
+                        <div class="step-images-sidebyside">
+                            <div class="doc-image-wrapper image-wrapper">
+                                <img src="images/step4.1.png" alt="IPv4 Firewall Rules - Select YES"
+                                    class="gallery-img step-doc-img">
+                                <div class="zoom-overlay">
+                                    <svg class="zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="doc-image-wrapper image-wrapper">
+                                <img src="images/step4.2.png" alt="IPv6 Firewall Rules - Select NO"
+                                    class="gallery-img step-doc-img">
+                                <div class="zoom-overlay">
+                                    <svg class="zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card scroll-animate">
+                    <div class="step-info-block">
+                        <div class="step-badge">Step 5</div>
+                        <h3 class="step-card-title">Configure the Campus Proxy</h3>
+                        <p class="step-card-desc">Reconnect to the RGUKT Campus Wi-Fi/LAN and run:</p>
+                        <div class="step-code-wrapper">
+                            <div class="step-code-block">
+                                <code id="step-5-code">rgukt-proxy</code>
+                                <button class="copy-btn" data-clipboard-target="#step-5-code"
+                                    aria-label="Copy configuration command">
+                                    <span class="copy-tooltip">Copy</span>
+                                    <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                    </svg>
+                                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.5">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="step-card-desc">Enter:</p>
+                        <p class="step-card-desc" style="margin-left: 1rem;">
+                            • Proxy Host<br>
+                            • Username<br>
+                            • Password
+                        </p>
+                        <p class="step-card-desc">The installer automatically configures Redsocks, firewall rules,
+                            persistence, and verifies internet connectivity.</p>
+                    </div>
+                    <div class="step-card-visual">
+                        <div class="doc-image-wrapper image-wrapper">
+                            <img src="images/step6.png" alt="Configure Campus Proxy Settings"
+                                class="gallery-img step-doc-img">
+                            <div class="zoom-overlay">
+                                <svg class="zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card scroll-animate">
+                    <div class="step-info-block">
+                        <div class="step-badge">Step 6</div>
+                        <h3 class="step-card-title">Installation Complete</h3>
+                        <p class="step-card-desc">Once the installation finishes successfully, you're ready to use Git,
+                            npm, Docker, SSH, apt, curl, and other terminal applications on the RGUKT Campus Network
+                            without any additional proxy configuration.</p>
+                    </div>
+                    <div class="step-card-visual">
+                        <div class="doc-image-wrapper image-wrapper">
+                            <img src="images/result.png" alt="Installation Complete" class="gallery-img step-doc-img">
+                            <div class="zoom-overlay">
+                                <svg class="zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="configured" class="configured-section scroll-animate">
+            <div class="section-header">
+                <h2 class="section-title">What Gets Configured?</h2>
+                <p class="section-subtitle">A breakdown of the system configurations applied by the installer to keep
+                    your proxy functioning smoothly.</p>
+            </div>
+            <div class="configured-grid">
+                <div class="configured-card scroll-animate">
+                    <div class="configured-icon-wrapper">
+                        <svg class="configured-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                            <rect x="9" y="9" width="6" height="6"></rect>
+                            <line x1="9" y1="1" x2="9" y2="4"></line>
+                            <line x1="15" y1="1" x2="15" y2="4"></line>
+                            <line x1="9" y1="20" x2="9" y2="23"></line>
+                            <line x1="15" y1="20" x2="15" y2="23"></line>
+                            <line x1="20" y1="9" x2="23" y2="9"></line>
+                            <line x1="20" y1="15" x2="23" y2="15"></line>
+                            <line x1="1" y1="9" x2="4" y2="9"></line>
+                            <line x1="1" y1="15" x2="4" y2="15"></line>
+                        </svg>
+                    </div>
+                    <h3 class="configured-card-title">Redsocks Proxy</h3>
+                    <p class="configured-card-desc">Automatically constructs and maintains your
+                        <code>/etc/redsocks.conf</code> with server endpoints and authentication hashes.</p>
+                </div>
+                <div class="configured-card scroll-animate">
+                    <div class="configured-icon-wrapper">
+                        <svg class="configured-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="configured-card-title">iptables Rules</h3>
+                    <p class="configured-card-desc">Redirects outer TCP traffic seamlessly to port 12345 while excluding
+                        local networks (127.0.0.0/8, 10.0.0.0/8, etc.) to keep internal connections intact.</p>
+                </div>
+                <div class="configured-card scroll-animate">
+                    <div class="configured-icon-wrapper">
+                        <svg class="configured-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                            <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                            <polyline points="7 3 7 8 15 8"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="configured-card-title">Persistent Firewall</h3>
+                    <p class="configured-card-desc">Saves all routing and iptables rule configurations permanently using
+                        <code>netfilter-persistent</code> so your internet works seamlessly after power cycles.</p>
+                </div>
+                <div class="configured-card scroll-animate">
+                    <div class="configured-icon-wrapper">
+                        <svg class="configured-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="configured-card-title">Systemd Startup Service</h3>
+                    <p class="configured-card-desc">Installs an override script to verify the system network is fully
+                        connected before starting Redsocks, avoiding silent boot failures.</p>
+                </div>
+                <div class="configured-card scroll-animate">
+                    <div class="configured-icon-wrapper">
+                        <svg class="configured-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="22 11.08 22 12 12 22 9 19 9 19 12 16 12 16"></polyline>
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="configured-card-title">Automatic Connectivity Test</h3>
+                    <p class="configured-card-desc">Directly audits the configured tunnel against external repositories
+                        like npm registry to immediately verify authentication status.</p>
+                </div>
+                <div class="configured-card scroll-animate">
+                    <div class="configured-icon-wrapper">
+                        <svg class="configured-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="4 17 10 11 4 5"></polyline>
+                            <line x1="12" y1="19" x2="20" y2="19"></line>
+                        </svg>
+                    </div>
+                    <h3 class="configured-card-title">Zero Manual Proxy Configuration</h3>
+                    <p class="configured-card-desc">Interactive step-by-step assistant requesting host IP, password, and
+                        proxy credentials with clean warnings, diagnostics, and banners.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="quote-section scroll-animate">
+            <p class="quote-text">"Built to help every RGUKT Linux user spend less time configuring proxies and more
+                time building great software."</p>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <span class="footer-text">Created with ❤️ for rgukt by <a
+                        href="https://www.linkedin.com/in/udaykumar-angari/" target="_blank" rel="noopener noreferrer"
+                        class="footer-author-link">Udaykumar Angari</a>.</span>
+            </div>
+            <div class="footer-right">
+                <a href="https://github.com/UdaykumarAngari/rgukt-proxy" target="_blank" rel="noopener noreferrer"
+                    class="footer-link">
+                    <svg class="footer-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                    </svg>
+                    <span>GitHub</span>
+                </a>
+                <a href="https://www.linkedin.com/in/udaykumar-angari/" target="_blank" rel="noopener noreferrer"
+                    class="footer-link">
+                    <svg class="footer-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                    </svg>
+                    <span>LinkedIn</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Screenshot lightbox">
+        <button class="lightbox-close" aria-label="Close modal">&times;</button>
+        <div class="lightbox-wrapper">
+            <img class="lightbox-content" id="lightbox-img" alt="Zoomed screenshot view">
+            <div id="lightbox-caption" class="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
