@@ -773,7 +773,7 @@ html.dark .sun-icon {
     color: var(--text-code-block);
     background: none;
     border: none;
-    padding: 0;
+    padding: 0 2rem 0 0;
     border-radius: 0;
     overflow-x: auto;
     width: 100%;
@@ -1120,7 +1120,19 @@ html.dark .sun-icon {
     }
     
     .nav-menu {
-        gap: 0.75rem;
+        gap: 0.5rem;
+    }
+    
+    .nav-item {
+        font-size: 0.8rem;
+    }
+    
+    .github-nav-link span {
+        display: none;
+    }
+    
+    .github-nav-link {
+        padding: 0.35rem;
     }
     
     .logo-text {
@@ -1131,6 +1143,11 @@ html.dark .sun-icon {
         padding: calc(var(--header-height) + 3rem) 1rem 3rem 1rem;
     }
     
+    .hero-title {
+        font-size: clamp(1.75rem, 6vw, 2.35rem);
+        letter-spacing: -0.03em;
+    }
+    
     .hero-actions {
         flex-direction: column;
         width: 100%;
@@ -1139,6 +1156,16 @@ html.dark .sun-icon {
     .btn {
         width: 100%;
         justify-content: center;
+    }
+    
+    .terminal-body {
+        overflow-x: auto;
+        padding: 0.75rem;
+    }
+    
+    .term-line, .term-err {
+        white-space: pre-wrap;
+        word-break: break-all;
     }
     
     .footer-container {
