@@ -2,6 +2,8 @@
 
 RGUKT Transparent Proxy Installer is a command line utility that configures system level transparent proxy redirection on Ubuntu systems. It allows terminal applications and developer tools to access the internet seamlessly when connected to the RGUKT campus network without requiring manual, tool specific proxy configurations.
 
+For detailed steps and visual guides, visit [rgukt-proxy.udaykumar-angari.in](https://rgukt-proxy.udaykumar-angari.in/).
+
 ## The Problem
 
 Most developer tools and command line utilities (such as Git, npm, Docker, Maven, apt, SSH, curl, and wget) do not respect standard system environment variables or browser proxy settings by default. Configuring them manually is repetitive, error prone, and often fails to cover all development workflows.
