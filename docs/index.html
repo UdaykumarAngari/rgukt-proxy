@@ -11,11 +11,11 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-41E8G06QB8"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-        gtag('config', 'G-41E8G06QB8');
+    gtag('config', 'G-41E8G06QB8');
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,9 +49,7 @@
                 </svg>
                 <span class="logo-text">RGUKT Proxy</span>
             </a>
-            <nav class="nav-menu">
-                <a href="#why-built" class="nav-item">Why I Built This</a>
-                <a href="#installation" class="nav-item">Installation</a>
+            <div class="nav-actions">
                 <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
                     <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round">
@@ -70,6 +68,18 @@
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
                 </button>
+                <button id="menu-toggle" class="menu-toggle-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12" class="line-mid"></line>
+                        <line x1="3" y1="6" x2="21" y2="6" class="line-top"></line>
+                        <line x1="3" y1="18" x2="21" y2="18" class="line-bot"></line>
+                    </svg>
+                </button>
+            </div>
+            <nav class="nav-menu" id="nav-menu">
+                <a href="#why-built" class="nav-item">Why I Built This</a>
+                <a href="#installation" class="nav-item">Installation</a>
                 <a href="https://github.com/UdaykumarAngari/rgukt-proxy" target="_blank" rel="noopener noreferrer"
                     class="nav-item github-nav-link">
                     <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor">

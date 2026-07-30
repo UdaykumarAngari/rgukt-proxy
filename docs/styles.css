@@ -199,6 +199,7 @@ code {
     font-size: 1rem;
     color: var(--text-primary);
     letter-spacing: -0.01em;
+    margin-right: auto;
 }
 
 .logo-icon {
@@ -207,10 +208,52 @@ code {
     color: var(--text-primary);
 }
 
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    order: 3;
+}
+
+.menu-toggle-btn {
+    display: none; /* hidden on desktop */
+    background: none;
+    border: 1px solid var(--border-color);
+    width: 44px;
+    height: 44px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    align-items: center;
+    justify-content: center;
+    transition: background-color var(--transition-speed), border-color var(--transition-speed);
+}
+
+.menu-toggle-btn:hover {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-hover);
+}
+
+.menu-icon {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+}
+
+/* Hamburger lines transition */
+.menu-toggle-btn .line-top,
+.menu-toggle-btn .line-mid,
+.menu-toggle-btn .line-bot {
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    transform-origin: center;
+}
+
 .nav-menu {
     display: flex;
     align-items: center;
     gap: 1.25rem;
+    order: 2;
+    margin-right: 1.25rem;
 }
 
 .nav-item {
@@ -247,7 +290,8 @@ code {
 .theme-toggle-btn {
     background: none;
     border: 1px solid var(--border-color);
-    padding: 0.45rem;
+    width: 44px;
+    height: 44px;
     border-radius: 6px;
     cursor: pointer;
     color: var(--text-secondary);
@@ -263,8 +307,8 @@ code {
 }
 
 .theme-toggle-btn svg {
-    width: 15px;
-    height: 15px;
+    width: 16px;
+    height: 16px;
     stroke: currentColor;
     fill: none;
     display: none;
@@ -469,6 +513,7 @@ html.dark .sun-icon {
     font-weight: 600;
     font-size: 0.875rem;
     cursor: pointer;
+    min-height: 44px;
     transition: background var(--transition-speed) ease, border-color var(--transition-speed) ease;
 }
 
@@ -542,6 +587,7 @@ html.dark .sun-icon {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
+    min-width: 0;
 }
 
 .why-built-content p {
@@ -623,6 +669,7 @@ html.dark .sun-icon {
     align-self: stretch;
     display: flex;
     flex-direction: column;
+    min-width: 0;
 }
 
 .terminal-card {
@@ -668,6 +715,7 @@ html.dark .sun-icon {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    overflow-x: auto;
 }
 
 .term-cmd {
@@ -682,6 +730,10 @@ html.dark .sun-icon {
     color: #F85149;
     padding-left: 0.75rem;
     font-size: 0.75rem;
+}
+
+.term-line, .term-err {
+    white-space: nowrap;
 }
 
 /* ==========================================================================
@@ -722,6 +774,7 @@ html.dark .sun-icon {
 
 .step-info-block {
     flex: 1;
+    min-width: 0;
 }
 
 .step-badge {
@@ -790,16 +843,14 @@ html.dark .sun-icon {
     flex: 1.1;
     display: flex;
     justify-content: center;
+    min-width: 0;
 }
 
 .step-images-sidebyside {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 0.75rem;
     width: 100%;
-}
-
-.step-images-sidebyside .doc-image-wrapper {
-    flex: 1;
 }
 
 .doc-image-wrapper {
@@ -1025,8 +1076,8 @@ html.dark .sun-icon {
     font-weight: 300;
     cursor: pointer;
     line-height: 1;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1104,9 +1155,45 @@ html.dark .sun-icon {
     .step-info-block, .step-card-visual {
         width: 100%;
     }
+}
+
+@media (max-width: 768px) {
+    .menu-toggle-btn {
+        display: flex;
+    }
     
-    .step-images-sidebyside {
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: var(--header-height);
+        left: 0;
+        width: 100%;
+        background-color: var(--bg-header);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--border-color);
         flex-direction: column;
+        padding: 1.5rem;
+        gap: 1.25rem;
+        align-items: stretch;
+        box-shadow: var(--shadow-md);
+        z-index: 99;
+    }
+    
+    .nav-menu.active {
+        display: flex;
+    }
+    
+    .nav-item {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid var(--border-color);
+        text-align: center;
+    }
+    
+    .github-nav-link {
+        justify-content: center;
+        border-bottom: none;
+        padding: 0.75rem 1.25rem;
     }
 }
 
@@ -1119,22 +1206,6 @@ html.dark .sun-icon {
         padding: 0 1rem;
     }
     
-    .nav-menu {
-        gap: 0.5rem;
-    }
-    
-    .nav-item {
-        font-size: 0.8rem;
-    }
-    
-    .github-nav-link span {
-        display: none;
-    }
-    
-    .github-nav-link {
-        padding: 0.35rem;
-    }
-    
     .logo-text {
         display: none;
     }
@@ -1144,8 +1215,12 @@ html.dark .sun-icon {
     }
     
     .hero-title {
-        font-size: clamp(1.75rem, 6vw, 2.35rem);
+        font-size: clamp(1.65rem, 6vw, 2.2rem);
         letter-spacing: -0.03em;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.95rem;
     }
     
     .hero-actions {
@@ -1158,20 +1233,37 @@ html.dark .sun-icon {
         justify-content: center;
     }
     
-    .terminal-body {
-        overflow-x: auto;
+    .why-built-section,
+    .installation-section,
+    .configured-section {
+        padding: 3rem 1.25rem;
+    }
+    
+    .steps-list {
+        gap: 3rem;
+    }
+    
+    .step-card {
+        padding: 1.25rem;
+    }
+    
+    .step-images-sidebyside {
+        grid-template-columns: 1fr;
+    }
+    
+    .copy-btn {
         padding: 0.75rem;
     }
     
-    .term-line, .term-err {
-        white-space: pre-wrap;
-        word-break: break-all;
+    .terminal-body {
+        padding: 0.75rem;
     }
     
     .footer-container {
         flex-direction: column;
         text-align: center;
         align-items: center;
+        gap: 1rem;
     }
     
     .footer-right {
