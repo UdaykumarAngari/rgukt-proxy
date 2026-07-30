@@ -138,6 +138,8 @@ html.dark {
 html {
     scroll-behavior: smooth;
     font-size: 16px;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 body {
@@ -147,6 +149,7 @@ body {
     line-height: 1.625;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    width: 100%;
 }
 
 a {
@@ -355,6 +358,8 @@ html.dark .sun-icon {
 
 .hero-container {
     max-width: 680px;
+    width: 100%;
+    min-width: 0;
 }
 
 .hero-badge {
@@ -384,15 +389,18 @@ html.dark .sun-icon {
 }
 
 .hero-subtitle {
-    font-size: clamp(1rem, 2vw, 1.15rem);
+    font-size: clamp(0.95rem, 2vw, 1.15rem);
     color: var(--text-secondary);
     max-width: 580px;
+    width: 100%;
     margin: 0 auto 2.5rem auto;
 }
 
 /* Copy Terminal Code Box */
 .command-box-wrapper {
     max-width: 520px;
+    width: 100%;
+    min-width: 0;
     margin: 0 auto 2.5rem auto;
 }
 
@@ -405,6 +413,8 @@ html.dark .sun-icon {
     padding: 0.7rem 1rem;
     position: relative;
     box-shadow: var(--shadow-sm);
+    width: 100%;
+    min-width: 0;
 }
 
 .command-prompt {
@@ -414,6 +424,7 @@ html.dark .sun-icon {
     user-select: none;
     margin-right: 0.5rem;
     font-size: 0.875rem;
+    flex-shrink: 0;
 }
 
 .command-text {
@@ -428,6 +439,7 @@ html.dark .sun-icon {
     white-space: nowrap;
     text-align: left;
     flex-grow: 1;
+    min-width: 0;
     scrollbar-width: none;
 }
 
@@ -818,6 +830,8 @@ html.dark .sun-icon {
     position: relative;
     display: flex;
     align-items: center;
+    width: 100%;
+    min-width: 0;
 }
 
 .step-code-block code {
@@ -826,10 +840,12 @@ html.dark .sun-icon {
     color: var(--text-code-block);
     background: none;
     border: none;
-    padding: 0 2rem 0 0;
+    padding: 0 2.2rem 0 0;
     border-radius: 0;
     overflow-x: auto;
+    white-space: nowrap;
     width: 100%;
+    min-width: 0;
 }
 
 .step-code-block .copy-btn {
