@@ -80,6 +80,7 @@
             <nav class="nav-menu" id="nav-menu">
                 <a href="#why-built" class="nav-item">Why I Built This</a>
                 <a href="#installation" class="nav-item">Installation</a>
+                <a href="#disable-proxy" class="nav-item">Disable Proxy</a>
                 <a href="https://github.com/UdaykumarAngari/rgukt-proxy" target="_blank" rel="noopener noreferrer"
                     class="nav-item github-nav-link">
                     <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -565,6 +566,48 @@
                 </div>
             </div>
         </section>
+
+        <section id="disable-proxy" class="installation-section scroll-animate">
+            <div class="section-header">
+                <h2 class="section-title">Stop RGUKT Proxy</h2>
+                <p class="section-subtitle">
+                    Switching to your home Wi-Fi or mobile hotspot?
+                    Stop the proxy service before disconnecting from campus.
+                </p>
+            </div>
+        
+            <div class="steps-list">
+                <div class="step-card scroll-animate">
+                    <div class="step-info-block">
+                        <div class="step-badge">Step 1</div>
+                        <h3 class="step-card-title">Stop the Proxy Service</h3>
+                        <p class="step-card-desc">
+                            Run this command to stop Redsocks temporarily.
+                        </p>
+        
+                        <div class="step-code-wrapper">
+                            <div class="step-code-block">
+                                <code id="stop-proxy-code">sudo systemctl stop redsocks</code>
+                                <button class="copy-btn"
+                                    data-clipboard-target="#stop-proxy-code"
+                                    aria-label="Copy stop command">
+                                    <span class="copy-tooltip">Copy</span>
+                                </button>
+                            </div>
+                        </div>
+        
+                        <p class="step-card-desc">
+                            <strong>Note:</strong> This stops Redsocks but leaves
+                            the iptables redirection rules in place. If your
+                            internet stops working, the rules must be removed
+                            safely using the rules created by the installer.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+
 
         <section class="quote-section scroll-animate">
             <p class="quote-text">"Built to help every RGUKT Linux user spend less time configuring proxies and more
