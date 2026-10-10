@@ -572,7 +572,7 @@
                 <h2 class="section-title">Stop RGUKT Proxy</h2>
                 <p class="section-subtitle">
                     Switching to your home Wi-Fi or mobile hotspot?
-                    Stop the proxy service before disconnecting from campus.
+                    Follow these steps to stop the proxy.
                 </p>
             </div>
         
@@ -582,7 +582,7 @@
                         <div class="step-badge">Step 1</div>
                         <h3 class="step-card-title">Stop the Proxy Service</h3>
                         <p class="step-card-desc">
-                            Run this command to stop Redsocks temporarily.
+                            Stop the Redsocks service.
                         </p>
         
                         <div class="step-code-wrapper">
@@ -592,15 +592,56 @@
                                     data-clipboard-target="#stop-proxy-code"
                                     aria-label="Copy stop command">
                                     <span class="copy-tooltip">Copy</span>
+                                    <svg class="copy-icon" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <rect x="9" y="9" width="13" height="13" rx="2"></rect>
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                    </svg>
+                                    <svg class="check-icon" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor"
+                                        stroke-width="2.5">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+        
+                        <div class="step-badge">Step 2</div>
+                        <h3 class="step-card-title">Remove NAT Rules</h3>
+                        <p class="step-card-desc">
+                            Flush the IPv4 NAT table to remove the proxy's
+                            redirection rules.
+                        </p>
+        
+                        <div class="step-code-wrapper">
+                            <div class="step-code-block">
+                                <code id="flush-nat-code">sudo iptables -t nat -F</code>
+                                <button class="copy-btn"
+                                    data-clipboard-target="#flush-nat-code"
+                                    aria-label="Copy NAT flush command">
+                                    <span class="copy-tooltip">Copy</span>
+                                    <svg class="copy-icon" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <rect x="9" y="9" width="13" height="13" rx="2"></rect>
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                    </svg>
+                                    <svg class="check-icon" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor"
+                                        stroke-width="2.5">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
                                 </button>
                             </div>
                         </div>
         
                         <p class="step-card-desc">
-                            <strong>Note:</strong> This stops Redsocks but leaves
-                            the iptables redirection rules in place. If your
-                            internet stops working, the rules must be removed
-                            safely using the rules created by the installer.
+                            <strong>Warning:</strong> This command removes
+                            ALL rules in the IPv4 NAT table, not just RGUKT
+                            Proxy rules. It may affect Docker and other
+                            networking configurations. Use it only if you
+                            understand these consequences.
                         </p>
                     </div>
                 </div>
